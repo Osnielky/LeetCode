@@ -67,13 +67,62 @@ var maxProfit = function (prices) {
   return profit;
 };
 
+var longestPalindrome = function (s) {
+  let longest = 0;
+  let map = new Map();
+
+  for (let i = 0; i < s.length; i++) {
+    if (!map.has(s.charAt(i))) {
+      map.set(s.charAt(i), 1);
+    } else {
+      map.set(s.charAt(i), map.get(s.charAt(i)) + 1);
+    }
+  }
+
+  for (let value of map.values()) {
+    if (value % 2 === 0) {
+      longest += value;
+    } else {
+      longest += value - 1;
+    }
+  }
+
+  if (longest < s.length) {
+    longest++;
+  }
+
+  return longest;
+};
+
 function App() {
   return (
     <div className="App">
       <h1>Template is running</h1>
-      <h1>{maxProfit([7, 1, 5, 3, 6, 4])}</h1>
+      <h1>{longestPalindrome("abccccdd")}</h1>
     </div>
   );
 }
 
 export default App;
+
+//hashmap.size()
+//hashmap.get(<key>)
+//hashmap.has(<key>)
+///hashmap.set(<key>,<value>)
+//hashmap.delete(<key>)
+//hashmap.clear()
+
+// iterate over a map
+/*for (let value of map.values()){
+	console.log(value);
+}
+for (let [key, value] of map) {
+console.log(key + " = " + value);
+}
+for (let key of map.keys()) {
+	console.log(key);
+}
+for (let [key, value] of  map.entries()) {
+	console.log(key + " = " + value)
+}
+*/
